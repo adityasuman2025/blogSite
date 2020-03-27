@@ -76,20 +76,21 @@
 			   		if($isSomeOneLogged)
 			   		{
 			   	?>
-			   		<div class="user_post col-xs-12 col-md-9">
+			   		<div class="user_post col-xs-12 col-md-12">
 						<div class="post_textarea_thumbnail row">
 							<textarea maxlength="2500" class="post_textarea col-md-12 col-xs-12" placeholder="write your blog"></textarea>
-							<div class="post_thumbnail col-md-3 col-xs-3">fsb</div>
+							<div class="post_thumbnail col-md-3 col-xs-12"></div>
 						</div>
 						<div class="post_option">
 							<span class="post_photo">
 								<img src="img/photo.png">
 								Upload Photo
-								<input type="file" name="file" accept="image/*">								
+								<input type="file" id="file" name="file" accept="image/*">								
 							</span>						
 							<br />
 							<button class="post_button">POST</button>
 						</div>
+						<div class="error"></div>
 					</div>
 			   	<?php
 			   		}
@@ -139,18 +140,58 @@
 				});
 			});
 		
-		/*-----for posting photo------*/
-			$('.post_photo').click(function()
-			{
-				$('.ajax_loading_bckgrnd').fadeIn(500);
-				$('.ajax_loading_div').fadeIn(500);
+		//for uploading post image
+			img_address = "";
+			var post_address = "php/upload_file_on_server.php";
+		    $(document).on('change', '#file', function()
+		    {
+		      	$('.error').html("<img class=\"gif_loader\" src=\"img/loader1.gif\">");
 
-				var upload_what = "post_pic";
-				$.post('php/upload_post_pic_form.php', {upload_what: upload_what}, function(e)
+	      	//sending upload request to api 
+		        var property = document.getElementById("file").files[0];
+		        var image_name = property.name;
+		        var image_extension = image_name.split('.').pop().toLowerCase();
+		        
+		        var form_data = new FormData();
+				form_data.append("file", property);
+				$.ajax(
 				{
-					$('.ajax_content').html(e);
+					url: post_address,
+					method: "POST",
+					data: form_data,
+					contentType: false,
+					cache: false,
+					processData: false,
+					beforeSend:function()
+					{
+						$('.error').html("<img class=\"gif_loader\" src=\"img/loader1.gif\" /></br>Uploading File").css('color', 'black');
+					},
+					success: function(data)
+					{		
+						// console.log(data);
+						if(data == 0)
+						{
+							$('.error').text('Failed to upload file').css("color", 'red');
+						}
+						else if(data == -2)
+						{
+							$('.error').text("file uploading directory not present on server").css("color", 'red');
+						}
+						else if(data == -1)
+						{
+							$('.error').text("Something went wrong").css("color", 'red');
+						}
+						else
+						{
+							img_address = data;
+							$('.post_textarea').removeClass("col-md-12");
+							$('.post_textarea').addClass("col-md-9");
+							$('.post_thumbnail').html('<img src="' + img_address + '"/>');
+							$('.error').html("");
+						}
+					}
 				});
-			});
+		    });
 		</script>
 	</body>
 </html>

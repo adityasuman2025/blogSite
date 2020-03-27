@@ -8,12 +8,11 @@
 	$website = $_SERVER['HTTP_HOST']; //dns address of the site 
 	if($website == "localhost")
 	{	
-		$project_address = "/opt/lampp/htdocs/blogSite/";
-		$project_address = "";
+		$upload_address = "/opt/lampp/htdocs/blogSite/storage/";	
 	}
 	else
 	{
-		$project_address = ""; //change this address when deplying somewhere else
+		$upload_address = "storage/"; //change this address when deplying somewhere else
 	}	
 
 	$isSomeOneLogged = false;
