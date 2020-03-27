@@ -1,7 +1,7 @@
 <?php
 	include_once "connect_db.php";
 
-	$mysql_qry   = "SELECT * FROM blogs ORDER BY blog_id DESC";
+	$mysql_qry   = "SELECT * FROM blogs ORDER BY blog_id DESC LIMIT $pagination_count OFFSET $offset";
 	
 	$result = @mysqli_query($connect_link ,$mysql_qry);
 	if($result)
