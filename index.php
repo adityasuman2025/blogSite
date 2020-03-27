@@ -164,37 +164,7 @@
 		<div class="overlay_div">
 			<div class="close_overlay_btn"></div>
 			<br />
-			<div class="overlay_content">
-				<!-------displyaing the posting area only to admin--->
-				<br />
-				<?php			   	
-			   		if($isSomeOneLogged)
-			   		{
-			   	?>			   	
-			   		<div class="user_post col-xs-12 col-md-12">
-						<div class="post_textarea_thumbnail row">
-							<input type="text" class="edit_post_title col-md-12 col-xs-12" placeholder="blog title">
-
-							<textarea maxlength="2500" class="edit_post_textarea col-md-12 col-xs-12" placeholder="write your blog"></textarea>
-							<div class="post_thumbnail col-md-12 col-xs-12"></div>
-						</div>
-
-						<div class="col-xs-12 col-md-12 post_option">
-							<div class="post_photo">
-								<img src="img/photo.png">
-								Change Photo
-								<input type="file" id="edit_file" name="edit_file" accept="image/*">
-							</div>
-
-							<button class="edit_post_button">POST</button>
-						</div>
-						<div class="error"></div>
-					</div>
-			   	<?php
-			   		}
-		   		?>
-
-			</div>
+			<div class="overlay_content"></div>
 		</div>
 
 
@@ -405,11 +375,97 @@
 			});
 
 			function handleEditBlog(post_id)
-			{				
-				$('.overlay_backgrnd').fadeIn(300);
-				$('.overlay_div').fadeIn(300);
+			{
+				$.post('php/get_blog_by_id.php', {post_id: post_id}, function(data)
+				{
+					$('.overlay_backgrnd').fadeIn(300);
+					$('.overlay_div').fadeIn(300);
 
+					// console.log(data);
+					$('.overlay_content').html(data);
 
+				//for uploading post image
+					edit_img_address = $('.overlay_content').find('.edit_post_thumbnail').attr('src');
+					// console.log(edit_img_address);
+
+					var post_address = "php/edit_photo_on_server.php";
+				    $(document).on('change', '#edit_file', function()
+				    {
+				      	$('.edit_error').html("<img class=\"gif_loader\" src=\"img/loader1.gif\">");
+
+			      	//sending upload request to api 
+				        var property = document.getElementById("edit_file").files[0];
+				        var image_name = property.name;
+				        var image_extension = image_name.split('.').pop().toLowerCase();
+				        
+				        var form_data = new FormData();
+						form_data.append("edit_file", property);
+						$.ajax(
+						{
+							url: post_address,
+							method: "POST",
+							data: form_data,
+							contentType: false,
+							cache: false,
+							processData: false,
+							beforeSend:function()
+							{
+								$('.edit_error').html("<img class=\"gif_loader\" src=\"img/loader1.gif\" /></br>Uploading File").css('color', 'black');
+							},
+							success: function(data)
+							{		
+								// console.log(data);
+								if(data == 0)
+								{
+									$('.edit_error').text('Failed to upload file').css("color", 'red');
+								}
+								else if(data == -2)
+								{
+									$('.edit_error').text("file uploading directory not present on server").css("color", 'red');
+								}
+								else if(data == -1)
+								{
+									$('.edit_error').text("Something went wrong").css("color", 'red');
+								}
+								else
+								{
+									edit_img_address = data;
+									$('.edit_post_thumbnail').html('<img src="' + edit_img_address + '"/>');
+									$('.edit_error').html("");
+								}
+							}
+						});
+				    });
+				
+				//on clicking on update btn
+					$('.edit_post_button').on("click", function()
+					{				
+						var blog_title = $.trim($('.edit_post_title').val());
+						var blog_text = $.trim($('.edit_post_textarea').val());
+
+						$.post('php/update_blog_by_id.php', {post_id: post_id, blog_title: blog_title, blog_text: blog_text, img_address: edit_img_address, user_id: blogSite_logged_user_id, username: blogSite_logged_user_username}, function(data)
+						{
+							if(data == -100)
+							{
+								$('.error').text("Database connection error");
+							}
+							else if(data == -1)
+							{
+								$('.error').text("Something went wrong");
+							}
+							else if(data == 0)
+							{
+								$('.error').text("Failed to create blog");
+							}					
+							else if(data == 1)
+							{
+								location.reload();
+							}
+							else
+								$('.error').text("Unknown error");
+						});
+					});
+				});
 			}
 
 		//on clicking in close btn of overlay window
