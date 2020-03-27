@@ -102,6 +102,11 @@
 		<script type="text/javascript">
 			session_length = "<?php echo $session_time; ?>";
 			
+			blogSite_logged_user_id = "<?php echo $blogSite_logged_user_id; ?>";
+			blogSite_logged_user_username = "<?php echo $blogSite_logged_user_username; ?>";
+
+			console.log(blogSite_logged_user_username);
+
 		//function to handle cookies  
 		    function setCookie(name,value,mins) 
 		    {
@@ -192,6 +197,34 @@
 					}
 				});
 		    });
+		
+		//on clicking on post btn
+			$('.post_button').on("click", function()
+			{
+				var blog_text = $.trim($('.post_textarea').val());
+
+				$.post('php/create_blog.php', {blog_text: blog_text, img_address: img_address, user_id: blogSite_logged_user_id, username: blogSite_logged_user_username}, function(data)
+				{
+					if(data == -100)
+					{
+						$('.error').text("Database connection error");
+					}
+					else if(data == -1)
+					{
+						$('.error').text("Something went wrong");
+					}
+					else if(data == 0)
+					{
+						$('.error').text("Failed to create blog");
+					}					
+					else if(data == 1)
+					{
+						location.reload();
+					}
+					else
+						$('.error').text("Unknown error");
+				});
+			});
 		</script>
 	</body>
 </html>
