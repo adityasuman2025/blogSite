@@ -12,7 +12,7 @@
 	<title><?php echo $project_title; ?></title>
 	<link href="css/login.css" rel="stylesheet"/>
 	<link rel="icon" href="img/logo.png" />
-	<script type="text/javascript" src="js/jquery.js"> </script>
+	<script type="text/javascript" src="js/jquery.min.js"> </script>
 	
 	<meta name="viewport" content="width=device-width, initial-scale= 1">	
 	<meta charset="utf-8">
@@ -78,8 +78,7 @@
 
 	//on clicking on go btn	    
 		session_length = "<?php echo $session_time; ?>";
-		api_address = "<?php echo $api_address; ?>";		
-
+		
 		$('.button-5').on("click", function(e)
 		{
 			e.preventDefault();
@@ -92,11 +91,8 @@
 				$('.error').text("");
 				$('.error').html("<img class=\"gif_loader\" src=\"img/loader1.gif\">");
 
-				var post_address = api_address + "verify_user.php";
-				$.post(post_address, {login_username: login_username, login_password: login_password}, function(data)
+				$.post('php/verify_user.php', {login_username: login_username, login_password: login_password}, function(data)
 				{
-					// console.log(data);
-
 					if(data == -100)
 					{
 						$('.error').text("Database connection error");
@@ -111,8 +107,12 @@
 					}					
 					else
 					{
-						setCookie('MNgoDrive_logged_user_id', data, session_length);
-						location.href = "drive.php";
+						setCookie('blogSite_logged_user_id', data, session_length);
+						$.post('php/encrypt_api.php', {text: login_username, action: "encrypt"}, function(enc)
+						{
+							setCookie('blogSite_logged_user_username', enc, session_length);
+							location.href = "index.php";
+						});						
 					}
 				});	
 			}

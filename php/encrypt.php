@@ -11,8 +11,8 @@
 function encrypt_decrypt($action, $string) {
     $output = false;
     $encrypt_method = "AES-256-CBC";
-    $secret_key = 'Secret Key of Leave module fo CSE Students at IIT Patna';
-    $secret_iv = 'Secret iv of Leave module fo CSE Students at IIT Patna';
+    $secret_key = 'blogSiteOnDemandSecretkEY';
+    $secret_iv = 'blogSiteOnDemandSecretkEY';
     // hash
     $key = hash('sha256', $secret_key);
     
