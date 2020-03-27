@@ -1,0 +1,128 @@
+@font-face
+{
+    font-family:my;
+    src: url(fonts/calibri.ttf);
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+body 
+{
+  font-family: my;
+    background: #181915;
+}
+
+/*------login stuffs-------*/
+  .login_form
+  {
+      margin-top: 30px;
+      width: 40%;  
+  }
+
+  #login_logo
+  {
+    height: 150px;
+    width: 150px;
+  }
+
+  #login_title
+  {
+    color: #BFC0C0;
+    font-size: 160%;
+    font-weight: 900;
+  }
+
+  .gif_loader
+  {
+    height: 40px;
+    width: 40px;
+  }
+
+  input, select
+  {
+    height: 40px;
+    width: 80%;
+    padding: 0;
+    margin: 0;
+
+    border: 2px solid #BFC0C0;
+    padding: 5px;
+    background: none;
+    color: white;
+    margin: auto;
+  } 
+
+  .button-5 
+  {
+    display: inline-flex;
+    height: 40px;
+    width: 130px;
+    border: 2px solid #BFC0C0;
+    padding: 0px;
+    margin: 10px;
+    color: #BFC0C0;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: .8em;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .button_btn {
+    color: #BFC0C0;
+    background: none;
+    border: none;
+    padding: 0px;
+    margin: 0px;
+    font-size: 115%;
+    font-weight: bold;
+  }
+  
+  .translate {
+    z-index: -10;
+    transform: rotate(50deg);
+    width: 100%;
+    height: 250%;
+    left: -200px;
+    top: -30px;
+    background: #BFC0C0;
+    position: absolute;
+    transition: all .3s ease-Out;
+  }
+
+  .button-5:hover .translate {
+    left: 0;
+  }
+
+  .button-5:hover .button_btn {
+    color: #2D3142;
+   }
+
+  .success 
+  {
+    color: #3c763d; 
+    background: #dff0d8; 
+    border: 1px solid #3c763d;
+    margin-bottom: 20px;
+  }
+
+  .error
+  {
+    color: red;
+    /*font-size: 2px;*/
+    text-align: center;
+  }
+
+  @media screen and (max-width: 800px)
+  {
+    .login_form
+    {
+      width: 85%;
+    }
+  }
