@@ -26,30 +26,31 @@
 
 			//displaying blogs
 				$html = $html . "<div class=\"post_div\">
-							<h3 class=\"post_title_display\">
-								" . $get_post_title . "
-							</h3>
-							<div class=\"post_text_container\">
-								<div class=\"post_content_container\">";
-									if($get_post_photo !="")
-										$html= $html . "<center><img class=\"post_image_content\" src=\"$get_post_photo\" onerror=\"this.onerror=null;this.src='img/photo_placeholder.png';\" /></center>";
-									
-									if($get_post_text !="")
-										$html= $html . "<div class=\"post_text_content\">" . $get_post_text . "</div>";
+									<h3 class=\"post_title_display\">
+										" . $get_post_title . "
+									</h3>
+									<div class=\"post_text_container\">
+										<div class=\"post_content_container\">";
+											if($get_post_photo !="")
+												$html= $html . "<center><img class=\"post_image_content\" src=\"$get_post_photo\" onerror=\"this.onerror=null;this.src='img/photo_placeholder.png';\" /></center>";
+											
+											if($get_post_text !="")
+												$html= $html . "<div class=\"post_text_content\">" . $get_post_text . "</div>";
 				$html= $html . "		</div>";
 				$html= $html . "	</div>";
 				$html= $html . "	<div class=\"post_user_dp_name_mob\">
-								<img class=\"post_dp_icon\" src=\"img/user.png\" onerror=\"this.onerror=null;this.src='img/user.png';\"/>";
-									$html= $html . "<b>&nbsp $added_by_name</b> on ";
-									$html= $html . "<a>" . date('h:i A d M Y', strtotime($get_post_time)) . "</a>";
-							//showing delete button only if opened profile is of the loggined user
-								if($isSomeOneLogged)
-								{
-									$html= $html . "<img class=\"post_action_button\" src=\"img/delete.png\">";
-									$html= $html . "<img class=\"post_action_button\" src=\"img/edit.png\">";
-								}
+										<img class=\"post_dp_icon\" src=\"img/user.png\" onerror=\"this.onerror=null;this.src='img/user.png';\"/>";
+											$html= $html . "<b>&nbsp $added_by_name</b> on ";
+											$html= $html . "<a>" . date('h:i A d M Y', strtotime($get_post_time)) . "</a>";
+
+									//showing delete button only if opened profile is of the loggined user
+										if($isSomeOneLogged)
+										{
+											$html= $html . "<img class=\"post_action_button delt_btn\" src=\"img/delete.png\" id=\"delt_btn\" post_id=\"$get_post_id\">";
+											$html= $html . "<img class=\"post_action_button edit_btn\" src=\"img/edit.png\" id=\"edit_btn\" post_id=\"$get_post_id\">";
+										}
 				$html= $html . "	</div>
-					</div>";
+								</div>";
 			}
 
 			echo trim($html);

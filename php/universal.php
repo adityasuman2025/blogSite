@@ -4,7 +4,7 @@
 //global variables		
 	$session_time = 60*24; //in minutes //1 day
 	$project_title = "blogSite";
-	$pagination_count = "2";
+	$pagination_count = "4";
 
 	$website = $_SERVER['HTTP_HOST']; //dns address of the site 
 	if($website == "localhost")

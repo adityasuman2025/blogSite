@@ -88,12 +88,12 @@
 						</div>
 
 						<div class="col-xs-12 col-md-12 post_option">
-							<span class="post_photo">
+							<div class="post_photo">
 								<img src="img/photo.png">
 								Upload Photo
-								<input type="file" id="file" name="file" accept="image/*">								
-							</span>						
-							<br />
+								<input type="file" id="file" name="file" accept="image/*">
+							</div>
+
 							<button class="post_button">POST</button>
 						</div>
 						<div class="error"></div>
@@ -141,8 +141,8 @@
 										//showing delete button only if opened profile is of the loggined user
 											if($isSomeOneLogged)
 											{
-												echo "<img class=\"post_action_button\" src=\"img/delete.png\">";
-												echo "<img class=\"post_action_button\" src=\"img/edit.png\">";
+												echo "<img class=\"post_action_button delt_btn\" src=\"img/delete.png\" id=\"delt_btn\" post_id=\"$get_post_id\">";
+												echo "<img class=\"post_action_button edit_btn\" src=\"img/edit.png\" id=\"edit_btn\" post_id=\"$get_post_id\">";
 											}
 							
 							echo "	</div>
@@ -158,6 +158,45 @@
 				</div>
 			</div>
 		</div>	
+
+	<!--------overlay modal--------->
+		<div class="overlay_backgrnd"></div>
+		<div class="overlay_div">
+			<div class="close_overlay_btn"></div>
+			<br />
+			<div class="overlay_content">
+				<!-------displyaing the posting area only to admin--->
+				<br />
+				<?php			   	
+			   		if($isSomeOneLogged)
+			   		{
+			   	?>			   	
+			   		<div class="user_post col-xs-12 col-md-12">
+						<div class="post_textarea_thumbnail row">
+							<input type="text" class="edit_post_title col-md-12 col-xs-12" placeholder="blog title">
+
+							<textarea maxlength="2500" class="edit_post_textarea col-md-12 col-xs-12" placeholder="write your blog"></textarea>
+							<div class="post_thumbnail col-md-12 col-xs-12"></div>
+						</div>
+
+						<div class="col-xs-12 col-md-12 post_option">
+							<div class="post_photo">
+								<img src="img/photo.png">
+								Change Photo
+								<input type="file" id="edit_file" name="edit_file" accept="image/*">
+							</div>
+
+							<button class="edit_post_button">POST</button>
+						</div>
+						<div class="error"></div>
+					</div>
+			   	<?php
+			   		}
+		   		?>
+
+			</div>
+		</div>
+
 
 	<!---------script--------->
 		<script type="text/javascript">
@@ -297,6 +336,20 @@
 					{
 						$('.post_container').append(data);
 						offset = +offset + +pagination_count;
+
+					//on clicking on delt btn
+						$('.delt_btn').on("click", function()
+						{
+							var post_id = $(this).attr('post_id');
+							handleDeleteBlog(post_id);
+						});
+
+					//on clicking on edit btn
+						$('.edit_btn').on('click', function()
+						{
+							var post_id = $(this).attr('post_id');
+							handleEditBlog(post_id);
+						});
 					}
 
 					if(data == "") // if no more blogs exits then hiding load more btn
@@ -304,6 +357,66 @@
 						$('.load_more_post').remove();
 					}
 				});
+			});
+
+		//on clicking on delt btn
+			$('.delt_btn').on("click", function()
+			{
+				var post_id = $(this).attr('post_id');
+				handleDeleteBlog(post_id);
+			});
+
+		//function to delete a blog
+			function handleDeleteBlog(post_id)
+			{
+				// window.confirm("Are you sure to delete");
+				if(confirm("Are you sure to delete")) //of ok is pressed
+				{					
+					$.post('php/delete_blog_by_id.php', {post_id: post_id}, function(data)
+					{
+						// console.log(data);
+						if(data == -100)
+						{
+							$('.error').text("Database connection error");
+						}
+						else if(data == -1)
+						{
+							$('.error').text("Something went wrong");
+						}
+						else if(data == 0)
+						{
+							$('.error').text("Failed to delete the blog");
+						}					
+						else if(data == 1)
+						{
+							location.reload();
+						}
+						else
+							$('.error').text("Unknown error");
+					});
+				}
+			}
+
+		//on clicking on edit btn
+			$('.edit_btn').on('click', function()
+			{
+				var post_id = $(this).attr('post_id');
+				handleEditBlog(post_id);
+			});
+
+			function handleEditBlog(post_id)
+			{				
+				$('.overlay_backgrnd').fadeIn(300);
+				$('.overlay_div').fadeIn(300);
+
+
+			}
+
+		//on clicking in close btn of overlay window
+			$('.close_overlay_btn, .overlay_backgrnd').on("click", function()
+			{
+				$('.overlay_backgrnd').fadeOut(100);
+				$('.overlay_div').fadeOut(100);
 			});
 		</script>
 	</body>
