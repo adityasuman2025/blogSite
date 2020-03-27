@@ -1,10 +1,6 @@
 <?php
 	include_once 'php/universal.php';
 
-	if(isset($_COOKIE['section_cookie']))
-	{
-		
-	}
 ?>
 
 <html>
@@ -26,7 +22,7 @@
 
 	<body>
 	<!--------navigation bar---->
-		<nav class="navbar navbar-inverse">
+		<nav class="navbar navbar-inverse navbar-fixed-top">
 		  <div class="container-fluid">
 		    <div class="navbar-header">
 		      	<a class="navbar-brand" href="index.php">
@@ -47,7 +43,7 @@
 		   			$blogSite_logged_user_username = encrypt_decrypt('decrypt', $_COOKIE['blogSite_logged_user_username']);
 		   	?>
 		   		<ul class="nav navbar-nav">
-		      		<li class="active"><a href="dashboard.php"><img class="user_icon" src="img/user.png" /> <?php echo $blogSite_logged_user_username; ?></a></li>
+		      		<li class="active"><a><img class="user_icon" src="img/user.png" /> <?php echo $blogSite_logged_user_username; ?></a></li>
 		    	</ul>
 
 			    <ul class="nav navbar-nav navbar-right">
@@ -73,7 +69,31 @@
 	<!--------main container------>
 		<div class="container-fluid">
 		<!------notification table-------->	
-			<div class="row">
+			<div class="row window_row">
+				<br />
+				<?php
+			   	//displyaing the posting area only to admin
+			   		if($isSomeOneLogged)
+			   		{
+			   	?>
+			   		<div class="user_post col-xs-12 col-md-9">
+						<div class="post_textarea_thumbnail row">
+							<textarea maxlength="2500" class="post_textarea col-md-12 col-xs-12" placeholder="write your blog"></textarea>
+							<div class="post_thumbnail col-md-3 col-xs-3">fsb</div>
+						</div>
+						<div class="post_option">
+							<span class="post_photo">
+								<img src="img/photo.png">
+								Upload Photo
+								<input type="file" name="file" accept="image/*">								
+							</span>						
+							<br />
+							<button class="post_button">POST</button>
+						</div>
+					</div>
+			   	<?php
+			   		}
+		   		?>
 			</div>
 		</div>	
 
@@ -118,22 +138,19 @@
 					location.reload();
 				});
 			});
-	
-		//on clicking on view btn
-			$('.view_btn').on('click', function()
+		
+		/*-----for posting photo------*/
+			$('.post_photo').click(function()
 			{
-				viewClickHandle($(this));
+				$('.ajax_loading_bckgrnd').fadeIn(500);
+				$('.ajax_loading_div').fadeIn(500);
+
+				var upload_what = "post_pic";
+				$.post('php/upload_post_pic_form.php', {upload_what: upload_what}, function(e)
+				{
+					$('.ajax_content').html(e);
+				});
 			});
-
-			function viewClickHandle(e)
-			{
-				var location = e.attr("location");
-
-				$.redirect(location,
-		        {
-		            //location: location
-		        }, "GET", "_blank");			 
-			}
 		</script>
 	</body>
 </html>
