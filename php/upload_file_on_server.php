@@ -27,7 +27,7 @@
 
 		//removing special symbol from name of the file to be uploaded	
 			$find = array("$", ",", "`", "~", ">", "<", "'", "\"","]","[","]","{","}","=","+",")", "(", "^", "!", "/","-", "@", "#","%","&", "*",";", ":", "|", " ", "?", "\\", ".");
-			$trimmed_name = str_replace($find, "_", $name);		
+			$trimmed_name = str_replace($find, "_", $name);
 			$trimmed_name = $trimmed_name . "_" . time();
 			
 			$encrypted_name = encrypt_decrypt("encrypt", $trimmed_name);
