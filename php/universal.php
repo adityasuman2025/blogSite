@@ -7,9 +7,10 @@
 	$pagination_count = "4";
 
 	$website = $_SERVER['HTTP_HOST']; //dns address of the site 
-	if($website == "localhost")
+	if( $website == "localhost" || "localhost:8080" )
 	{	
-		$upload_address = "/opt/lampp/htdocs/blogSite/storage/";	
+		$upload_address = "/opt/lampp/htdocs/blogSite/storage/";
+		$$upload_address = "storage/";
 	}
 	else
 	{
