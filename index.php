@@ -25,10 +25,10 @@
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 		  <div class="container-fluid">
 		    <div class="navbar-header">
-		      	<a class="navbar-brand" href="index.php">
+		      	<a class="navbar-brand">
 		      		<div class="row">		      	
 		      			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 x_m-p header_bar_title">
-		      				<img src="img/logo.png" class="" />
+		      				<img src="img/logo.png" />
 		      				<?php echo $project_title; ?>
 		      			</div>
 		      		</div>
@@ -61,7 +61,7 @@
 		   	?>		   	
 			  	<ul class="nav navbar-nav navbar-right">
 			    	<li class="active">
-			    		<a href="login.php" class="log_btn" style="font-size: 120%; background-color: #4ac12c;" >Login</a>
+			    		<a href="login.php" class="log_btn" style="font-size: 120%; background-color: #6f42c1;" >Login</a>
 			    	</li>
 			    </ul>
 		   	<?php		

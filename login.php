@@ -29,11 +29,11 @@
 		<form class="login_form">
 			<img src="img/logo.png" id="login_logo" />
 			<h2 id="login_title"><?php echo $project_title; ?></h2>
-			
-			<input type="text" id="login_username" placeholder="Username">
+			<br/><br/>
+			<input type="text" id="login_username" placeholder="username">
 			<br><br>
 
-			<input type="password" id="login_password" placeholder="Password">
+			<input type="password" id="login_password" placeholder="password">
 			<br>
 
 			<div class="button-5">

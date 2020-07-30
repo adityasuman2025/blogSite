@@ -9,6 +9,7 @@ body
 	padding:0;
 	margin:0;
 	font-family:my;
+	background: #f1f1f1;
 }
 
 a:hover
@@ -71,13 +72,15 @@ a:hover
 	padding: 0px;
 	margin: 0px;
 	vertical-align: middle;		
-	padding-left: 10px;
+	padding-left: 7px;
 	color: white;
+	font-size: 115%;
+	font-weight: 600;
 }
 
 .header_bar_title img
 {
-	padding: 4px;
+	padding: 8px;
 	height: 100%;
 }
 
@@ -93,7 +96,7 @@ a:hover
 	margin-top: 60px;
 	min-height: 100%;
 	
-	background-color: #e1e1e1;
+	/*background-color: white;*/
 
 	word-wrap: break-word;
 	word-break: break-all;
@@ -184,7 +187,7 @@ a:hover
 	
 	.post_button, .edit_post_button
 	{
-		background: #00cc44;
+		background: #6f42c1;
 		padding: 0;
 		margin: 0;
 		border: none;
@@ -209,7 +212,7 @@ a:hover
 	.load_more_post
 	{
 		width: 250px;
-		background-color: #00cc44;
+		background-color: #6f42c1;
 		color: white;
 		padding: 3px;
 		text-align: center;
