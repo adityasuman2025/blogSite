@@ -11,8 +11,8 @@
 function encrypt_decrypt($action, $string) {
     $output = false;
     $encrypt_method = "AES-256-CBC";
-    $secret_key = 'blogSiteOnDemandSecretkEY';
-    $secret_iv = 'blogSiteOnDemandSecretkEY';
+    $secret_key = 'ml_certific_encryption';
+    $secret_iv = 'ml_certific_encryption';
     // hash
     $key = hash('sha256', $secret_key);
     

@@ -95,9 +95,6 @@ a:hover
 	margin: auto;
 	margin-top: 60px;
 	min-height: 100%;
-	
-	/*background-color: white;*/
-
 	word-wrap: break-word;
 	word-break: break-all;
 }
@@ -118,6 +115,8 @@ a:hover
 	.user_post
 	{
 		overflow: hidden;
+		margin-bottom: 10px;
+		padding-top: 10px;
 	}
 
 	.post_title, .edit_post_title
@@ -128,6 +127,8 @@ a:hover
 		border: none;
 		border-radius: 5px;
 		margin-bottom: 10px;
+
+		box-shadow: 0px 0px 2px grey;
 	}
 
 	.post_textarea, .edit_post_textarea
@@ -139,20 +140,27 @@ a:hover
 		font-size: 120%;
 		border: none;
 		border-radius: 5px;
+
+		box-shadow: 0px 0px 2px grey;
 	}
 
 	.post_thumbnail
 	{
+		overflow: hidden;
+
 		margin: 0;
 		padding: 0;
 		max-height: 180px;
 		text-align: center;
-		
-		overflow: hidden;
+		border-radius: 5px;
+
+		box-shadow: 0px 0px 2px grey;
+		background-color: white;
 	}
 
 	.post_thumbnail img
 	{
+		padding: 10px;
 		width: 100%;
 		object-fit: contain;
 		object-position: center;
@@ -166,13 +174,14 @@ a:hover
 
 	.post_photo
 	{
-		/*width: 60%;*/
 		background: #f1f1f1;
 		padding: 10px;
 		
 		border-radius: 10px;
 		background: white;
 		text-align: left;
+
+		box-shadow: 0px 0px 2px grey;
 	}
 
 	.post_photo img
@@ -201,7 +210,7 @@ a:hover
 		color: white;
 	}
 
-/*----blog siplaying area------*/
+/*----blog post stuffs------*/
 	.post_container
 	{
 		text-align: center;
@@ -226,16 +235,30 @@ a:hover
 	{
 		background: white;
 		box-shadow: 0px 0px 1px grey;
+		border-radius: 10px;
+
 		margin: 0;
 		margin-bottom: 20px;
 		padding: 0;
 		height: auto;
 		text-align: left;
-		/*display: inline-block;*/
 		vertical-align: top;
 	}
 
-/*----post_text_container-----*/
+	.post_title_display
+	{		
+		background: #6f42c1;
+		
+		font-size: 160%;
+		color: white;
+		font-weight: 700;
+
+		padding: 10px;
+		margin: 0px;
+		border-top-left-radius: 10px;
+		border-top-right-radius: 10px;
+	}
+
 	.post_text_container
 	{
 		width: 100%;
@@ -243,14 +266,27 @@ a:hover
 		padding: 0;
 	}
 
-	.post_title_display
-	{		
-		background: #00cc44;
-		
+	.post_content_container
+	{
+		width: 100%;
+	}
+
+	.post_text_content
+	{
+		font-size: 110%;
+		color: black;
+		overflow-wrap: break-word;
+
 		padding: 10px;
-		margin: 0px;
-		background: darkgrey;
-		/*font-weight: 900;*/
+		width: 100%;
+		min-height: 200px;
+		border: none;
+		resize: none;
+	}
+
+	.post_image_content
+	{
+		width: 100%;
 	}
 
 	.post_user_dp_name_mob
@@ -259,14 +295,9 @@ a:hover
 		background: #00cc44;
 		width: 100%;
 		background: lightgrey;
-	}
 
-	.post_user_dp_name
-	{
-		padding: 7px;
-		width: 100%;
-		background: lightgrey;
-		display: none;
+		border-bottom-left-radius: 10px;
+		border-bottom-right-radius: 10px;
 	}
 
 	.post_dp_icon
@@ -279,78 +310,12 @@ a:hover
 		background: white;
 	}
 
-	.post_location_icon
-	{
-		height: 20px;
-		border-radius: 0px;
-		vertical-align: middle;
-	}
-
 	.post_action_button
 	{
 		height: 30px;
 		padding: 6px;
 		float: right;
 		cursor: pointer;
-	}
-
-	.post_content_container
-	{
-		/*cursor: pointer;*/
-		width: 100%;
-	}
-
-	.post_text_content
-	{
-		color: black;
-		padding: 10px;
-		text-align: left;
-		font-size: 110%;
-		width: 100%;
-		overflow-wrap: break-word;
-	}
-
-	.post_image_content
-	{
-		width: 100%;
-	}
-
-	.post_video_content
-	{
-		width: 100%;
-	}
-
-	.post_like_comment_button
-	{
-		height: 42px;
-		padding: 8px;
-		background: #f1f1f1;
-		border-top: 1px solid lightgrey;
-	}
-
-	.post_like_comment_button img
-	{
-		height: 100%;
-		cursor: pointer;
-	}
-
-	.post_like_text
-	{
-		display: none;
-	}
-
-	.post_like_count
-	{
-		font-size: 115%;
-		padding: 2px;
-		border-radius: 3px;
-		box-shadow: 0px 0px 1px grey;
-		cursor: pointer;
-	}
-
-	.post_fav_button
-	{
-		float: right;
 	}
 
 /*--------overlay div stuffs---------*/

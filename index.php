@@ -74,7 +74,6 @@
 		<div class="container-fluid">		
 			<div class="row window_row">
 			<!-------displyaing the posting area only to admin--->
-				<br />
 				<?php			   	
 			   		if($isSomeOneLogged)
 			   		{
@@ -102,7 +101,7 @@
 			   		}
 		   		?>
 
-	   		<!-----user post---->
+			<!-----user post---->
 				<div class="post_container col-xs-12 col-md-12">
 					<?php
 						$offset = 0;
@@ -121,7 +120,7 @@
 							$added_by_name = $blog['added_by_name'];
 
 						//displaying blogs
-							echo "<div class=\"post_div\">
+							echo"<div class=\"post_div\">
 									<h3 class=\"post_title_display\">
 										$get_post_title
 									</h3>
@@ -131,7 +130,7 @@
 												echo "<center><img class=\"post_image_content\" src=\"$get_post_photo\" onerror=\"this.onerror=null;this.src='img/photo_placeholder.png';\" /></center>";
 											
 											if($get_post_text !="")
-												echo "<div class=\"post_text_content\">$get_post_text</div>";
+												echo "<textarea disabled class=\"post_text_content\">$get_post_text</textarea>";
 							echo "		</div>";
 							echo 	"</div>";
 							echo "	<div class=\"post_user_dp_name_mob\">
@@ -139,12 +138,10 @@
 												echo "<b>&nbsp $added_by_name</b> on ";
 												echo "<a>" . date('h:i A d M Y', strtotime($get_post_time)) . "</a>";
 										//showing delete button only if opened profile is of the loggined user
-											if($isSomeOneLogged)
-											{
+											if($isSomeOneLogged) {
 												echo "<img class=\"post_action_button delt_btn\" src=\"img/delete.png\" id=\"delt_btn\" post_id=\"$get_post_id\">";
 												echo "<img class=\"post_action_button edit_btn\" src=\"img/edit.png\" id=\"edit_btn\" post_id=\"$get_post_id\">";
 											}
-							
 							echo "	</div>
 								</div>";
 						}
@@ -167,40 +164,11 @@
 			<div class="overlay_content"></div>
 		</div>
 
-
+		
 	<!---------script--------->
 		<script type="text/javascript">
 			session_length = "<?php echo $session_time; ?>";
 			
-		//function to handle cookies  
-		    function setCookie(name,value,mins) 
-		    {
-		       	var now = new Date();
-		        var time = now.getTime();
-		        var expireTime = time + 60000 * mins;
-		        now.setTime(expireTime);
-		        var tempExp = 'Wed, 31 Oct 2012 08:50:17 GMT';
-
-		      document.cookie =  name + "=" + value + ";expires=" + now.toGMTString() + ";path=/";
-		    }
-
-		    function getCookie(name) {
-		        var nameEQ = name + "=";
-		        var ca = document.cookie.split(';');
-		        for(var i=0;i < ca.length;i++) {
-		            var c = ca[i];
-		            while (c.charAt(0)==' ') c = c.substring(1,c.length);
-		            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-		        }
-		        return null;
-		    }
-
-		    function eraseCookie(name) 
-		    {
-		    	var now = new Date(); 
-		        document.cookie = name + '=; expires=' + now.toGMTString() + ";path=/";
-		    }
-
 		//on clicking on logout btn
 			$('#logout_btn').on('click', function()
 			{
@@ -339,7 +307,6 @@
 		//function to delete a blog
 			function handleDeleteBlog(post_id)
 			{
-				// window.confirm("Are you sure to delete");
 				if(confirm("Are you sure to delete")) //of ok is pressed
 				{					
 					$.post('php/delete_blog_by_id.php', {post_id: post_id}, function(data)

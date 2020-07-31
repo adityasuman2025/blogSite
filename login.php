@@ -30,7 +30,8 @@
 			<img src="img/logo.png" id="login_logo" />
 			<h2 id="login_title"><?php echo $project_title; ?></h2>
 			<br/><br/>
-			<input type="text" id="login_username" placeholder="username">
+
+			<input type="text" id="login_email" placeholder="email id">
 			<br><br>
 
 			<input type="password" id="login_password" placeholder="password">
@@ -83,15 +84,15 @@
 		{
 			e.preventDefault();
 			
-			var login_username = $('#login_username').val().trim();
+			var login_email = $('#login_email').val().trim();
 			var login_password = $('#login_password').val().trim();
 
-			if(login_username != "" && login_password != "")
+			if(login_email != "" && login_password != "")
 			{
 				$('.error').text("");
 				$('.error').html("<img class=\"gif_loader\" src=\"img/loader1.gif\">");
 
-				$.post('php/verify_user.php', {login_username: login_username, login_password: login_password}, function(data)
+				$.post('php/verify_user.php', {login_email: login_email, login_password: login_password}, function(data)
 				{
 					if(data == -100)
 					{
@@ -101,23 +102,36 @@
 					{
 						$('.error').text("Something went wrong");
 					}
+					else if(data == -2)
+					{
+						$('.error').text("you are not authorized to log in");
+					}
 					else if(data == 0)
 					{
 						$('.error').text("Invalid login credentials");
 					}					
 					else
 					{
-						setCookie('blogSite_logged_user_id', data, session_length);
-						$.post('php/encrypt_api.php', {text: login_username, action: "encrypt"}, function(enc)
-						{
-							setCookie('blogSite_logged_user_username', enc, session_length);
-							location.href = "index.php";
-						});						
+						const resp = JSON.parse(data);
+						if(resp) {
+							const id = resp.id;
+							const name = resp.name;
+
+							if( id && name ) {
+								setCookie('blogSite_logged_user_id', id, session_length);
+								setCookie('blogSite_logged_user_username', name, session_length);
+
+								location.href = "index.php";
+							}
+						}
+
+						$('.error').text("Something went wrong");
 					}
 				});	
 			}
-			else
+			else {
 				$('.error').text("Please fill all the fields");
+			}
 		});
 	</script>
 </body>
