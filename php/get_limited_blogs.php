@@ -35,7 +35,7 @@
 												$html= $html . "<center><img class=\"post_image_content\" src=\"$get_post_photo\" onerror=\"this.onerror=null;this.src='img/photo_placeholder.png';\" /></center>";
 											
 											if($get_post_text !="")
-												$html= $html . "<div class=\"post_text_content\">" . $get_post_text . "</div>";
+												$html= $html . "<textarea disabled class=\"post_text_content\">$get_post_text</textarea>";
 				$html= $html . "		</div>";
 				$html= $html . "	</div>";
 				$html= $html . "	<div class=\"post_user_dp_name_mob\">

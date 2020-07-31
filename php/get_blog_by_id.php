@@ -22,7 +22,7 @@
 				$added_by_name = $row['added_by_name'];
 
 			//rendering html	
-				$html = $html . "<div class=\"user_post col-xs-12 col-md-12\">
+				$html = $html . "<div class=\"user_post col-xs-12 col-md-12\" style=\"padding-bottom: 20px; \">
 									<div class=\"post_textarea_thumbnail row\">
 										<input type=\"text\" class=\"edit_post_title col-md-12 col-xs-12\" placeholder=\"blog title\" value=\"$get_post_title\">
 
@@ -43,8 +43,9 @@
 
 										<button class=\"edit_post_button\">UPDATE</button>
 									</div>
+									
 									<div class=\"edit_error\"></div>									
-								</div><br /><br /><br /><br />";
+								</div>";
 			}
 
 			echo $html;
