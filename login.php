@@ -122,6 +122,8 @@
 								setCookie('blogSite_logged_user_username', name, session_length);
 
 								location.href = "index.php";
+
+								return;
 							}
 						}
 
