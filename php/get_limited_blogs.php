@@ -30,12 +30,25 @@
 										" . $get_post_title . "
 									</h3>
 									<div class=\"post_text_container\">
-										<div class=\"post_content_container\">";
-											if($get_post_photo !="")
-												$html= $html . "<center><img class=\"post_image_content\" src=\"$get_post_photo\" onerror=\"this.onerror=null;this.src='img/photo_placeholder.png';\" /></center>";
-											
-											if($get_post_text !="")
-												$html= $html . "<textarea disabled class=\"post_text_content\">$get_post_text</textarea>";
+										<div class=\"post_content_container\">
+											<div class=\"post_text_content\" >";
+
+											//if that post contains some text then displaying it line-by-line
+												if($get_post_text !="") {
+													$blog_text_line_arr = explode( "\n", $get_post_text );
+													// print_r($blog_text_line_arr);
+													foreach( $blog_text_line_arr as $blog_text_line ) {
+													//checking if text contains image
+														if( contains( $blog_image_secret_code, $blog_text_line ) ) {
+														//if it contains image then dislaying the image
+															$img_location = str_replace( $blog_image_secret_code ,"",$blog_text_line );
+															$html= $html . "<img class=\"post_image_content\" src=\"$img_location\" onerror=\"this.onerror=null;this.src='img/photo_placeholder.png';\" />";
+														} else {
+															$html= $html . "<div>" . $blog_text_line . "</div>";
+														}
+													}
+												}
+				$html= $html . "			</div>";
 				$html= $html . "		</div>";
 				$html= $html . "	</div>";
 				$html= $html . "	<div class=\"post_user_dp_name_mob\">

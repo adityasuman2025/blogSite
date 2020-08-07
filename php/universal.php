@@ -4,7 +4,7 @@
 //global variables		
 	$session_time = 60*24*15; //in minutes //15 days
 	$project_title = "ML Certific";
-	$pagination_count = "10";
+	$pagination_count = "2";
 
 	$website = $_SERVER['HTTP_HOST']; //dns address of the site 
 	if( $website == "localhost" || "localhost:8080" )
@@ -23,7 +23,7 @@
 	}
 
 	$blog_image_secret_code = "#--#--IMAGE--#--#";
-	
+
 	function contains($needle, $haystack)
 	{
 	    return strpos($haystack, $needle) !== false;

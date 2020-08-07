@@ -131,6 +131,7 @@
 											//if that post contains some text then displaying it line-by-line
 												if($get_post_text !="") {
 													$blog_text_line_arr = explode( "\n", $get_post_text );
+													// print_r($blog_text_line_arr);
 													foreach( $blog_text_line_arr as $blog_text_line ) {
 													//checking if text contains image
 														if( contains( $blog_image_secret_code, $blog_text_line ) ) {
@@ -143,7 +144,6 @@
 													}
 												}
 											echo "</div>";
-												// echo "<textarea disabled class=\"post_text_content\">$get_post_text</textarea>";
 							echo "		</div>";
 							echo 	"</div>";
 							echo "	<div class=\"post_user_dp_name_mob\">
@@ -219,8 +219,7 @@
 						$('.error').html("<img class=\"gif_loader\" src=\"img/loader1.gif\" /></br>Uploading File").css('color', 'black');
 					},
 					success: function(data)
-					{		
-						// console.log(data);
+					{
 						if(data == 0)
 						{
 							$('.error').text('Failed to upload file').css("color", 'red');
@@ -235,11 +234,17 @@
 						}
 						else
 						{
-							img_address = data;
+							img_address = data.trim();
 							$('.post_textarea').removeClass("col-md-12");
 							$('.post_textarea').addClass("col-md-9");
 							$('.post_thumbnail').html('<img src="' + img_address + '"/>');
 							$('.error').html("");
+
+						//adding image secret text in the blog_text
+						//to recognize that image is present at that position
+							var blog_text = $.trim($('.post_textarea').val());
+							blog_text += ( "\n\n" + blog_image_secret_code + img_address + blog_image_secret_code + "\n\n" );
+							$('.post_textarea').val(blog_text);
 						}
 					}
 				});
@@ -273,7 +278,6 @@
 						$('.error').text("Unknown error");
 				});
 			});
-		
 		
 		//on clickong on load more btn
 			offset = "<?php echo $offset; ?>";			
