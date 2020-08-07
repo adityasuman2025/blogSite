@@ -272,20 +272,21 @@ a:hover
 
 	.post_text_content
 	{
-		font-size: 110%;
+		font-size: 120%;
 		color: black;
 		overflow-wrap: break-word;
 
 		padding: 10px;
-		width: 100%;
-		min-height: 200px;
 		border: none;
 		resize: none;
 	}
 
 	.post_image_content
 	{
-		width: 100%;
+		width: 50%;
+		/* margin: auto; */
+		margin-top: 10px;
+		margin-bottom: 10px;
 	}
 
 	.post_user_dp_name_mob
@@ -411,5 +412,13 @@ a:hover
 
 		.post_title_display {
 			font-size: 120%;
+		}
+
+		.post_image_content
+		{
+			width: 90%;
+			/* margin: auto; */
+			margin-top: 10px;
+			margin-bottom: 10px;
 		}
 	}

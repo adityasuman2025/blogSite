@@ -21,4 +21,11 @@
 	{
 		$isSomeOneLogged = true;
 	}
+
+	$blog_image_secret_code = "#--#--IMAGE--#--#";
+	
+	function contains($needle, $haystack)
+	{
+	    return strpos($haystack, $needle) !== false;
+	}
 ?>

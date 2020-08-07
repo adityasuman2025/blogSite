@@ -126,11 +126,24 @@
 									</h3>
 									<div class=\"post_text_container\">
 										<div class=\"post_content_container\">";
-											if($get_post_photo !="")
-												echo "<center><img class=\"post_image_content\" src=\"$get_post_photo\" onerror=\"this.onerror=null;this.src='img/photo_placeholder.png';\" /></center>";
-											
-											if($get_post_text !="")
-												echo "<textarea disabled class=\"post_text_content\">$get_post_text</textarea>";
+											echo "<div class=\"post_text_content\" >";
+
+											//if that post contains some text then displaying it line-by-line
+												if($get_post_text !="") {
+													$blog_text_line_arr = explode( "\n", $get_post_text );
+													foreach( $blog_text_line_arr as $blog_text_line ) {
+													//checking if text contains image
+														if( contains( $blog_image_secret_code, $blog_text_line ) ) {
+														//if it contains image then dislaying the image
+															$img_location = str_replace( $blog_image_secret_code ,"",$blog_text_line );
+															echo "<img class=\"post_image_content\" src=\"$img_location\" onerror=\"this.onerror=null;this.src='img/photo_placeholder.png';\" />";
+														} else {
+															echo "<div>" . $blog_text_line . "</div>";
+														}
+													}
+												}
+											echo "</div>";
+												// echo "<textarea disabled class=\"post_text_content\">$get_post_text</textarea>";
 							echo "		</div>";
 							echo 	"</div>";
 							echo "	<div class=\"post_user_dp_name_mob\">
@@ -168,7 +181,8 @@
 	<!---------script--------->
 		<script type="text/javascript">
 			session_length = "<?php echo $session_time; ?>";
-			
+			blog_image_secret_code = "<?php echo $blog_image_secret_code; ?>";
+
 		//on clicking on logout btn
 			$('#logout_btn').on('click', function()
 			{
@@ -271,6 +285,7 @@
 				// console.log(offset);
 				$.post("php/get_limited_blogs.php", {offset: offset, pagination_count: pagination_count}, function(data)
 				{
+					data = data.trim();
 					if(data != "" && data != 0 && data != -1 && data != -100)
 					{
 						$('.post_container').append(data);
@@ -353,7 +368,6 @@
 
 				//for uploading post image
 					edit_img_address = $('.overlay_content').find('.edit_post_thumbnail').attr('src');
-					// console.log(edit_img_address);
 
 					var post_address = "php/edit_photo_on_server.php";
 				    $(document).on('change', '#edit_file', function()
@@ -396,14 +410,15 @@
 								}
 								else
 								{
-									edit_img_address = data;
+									edit_img_address = data.trim();
+
 									$('.edit_post_thumbnail').html('<img src="' + edit_img_address + '"/>');
 									$('.edit_error').html("");
 
 								//adding image secret text in the blog_text
 								//to recognize that image is present at that position
 									var blog_text = $.trim($('.edit_post_textarea').val());
-									blog_text += ( "\n\n#--#--IMAGE--#--#" + edit_img_address + "#--#--IMAGE--#--#\n\n" );
+									blog_text += ( "\n\n" + blog_image_secret_code + edit_img_address + blog_image_secret_code + "\n\n" );
 									$('.edit_post_textarea').val(blog_text);
 								}
 							}
