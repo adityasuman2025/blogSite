@@ -260,6 +260,7 @@
 				});
 			});
 		
+		
 		//on clickong on load more btn
 			offset = "<?php echo $offset; ?>";			
 			pagination_count = "<?php echo $pagination_count; ?>";
@@ -348,7 +349,6 @@
 					$('.overlay_backgrnd').fadeIn(300);
 					$('.overlay_div').fadeIn(300);
 
-					// console.log(data);
 					$('.overlay_content').html(data);
 
 				//for uploading post image
@@ -399,6 +399,12 @@
 									edit_img_address = data;
 									$('.edit_post_thumbnail').html('<img src="' + edit_img_address + '"/>');
 									$('.edit_error').html("");
+
+								//adding image secret text in the blog_text
+								//to recognize that image is present at that position
+									var blog_text = $.trim($('.edit_post_textarea').val());
+									blog_text += ( "\n\n#--#--IMAGE--#--#" + edit_img_address + "#--#--IMAGE--#--#\n\n" );
+									$('.edit_post_textarea').val(blog_text);
 								}
 							}
 						});

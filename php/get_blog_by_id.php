@@ -30,7 +30,7 @@
 										<div class=\"edit_post_thumbnail col-md-12 col-xs-12\" src=\"$get_post_photo\" >";
 
 									if($get_post_photo != "")
-										$html = $html . "<img src=\"$get_post_photo\" onerror=\"this.onerror=null;this.src='img/photo_placeholder.png';\" />";									
+										$html = $html . "<img onerror=\"this.onerror=null;this.src='img/photo_placeholder.png';\" />";									
 					$html = $html . "</div>
 									</div>
 

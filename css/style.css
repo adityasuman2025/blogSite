@@ -245,10 +245,12 @@ a:hover
 	.post_title_display
 	{		
 		background: #6f42c1;
-		
-		font-size: 160%;
-		color: white;
-		font-weight: 700;
+		background: lightgrey;
+		background: rgb(68, 68, 68);
+		color: #f1f1ff;
+
+		font-size: 150%;
+		font-weight: 600;
 
 		padding: 10px;
 		margin: 0px;
@@ -289,7 +291,6 @@ a:hover
 	.post_user_dp_name_mob
 	{
 		padding: 6px;
-		background: #00cc44;
 		width: 100%;
 		background: lightgrey;
 
