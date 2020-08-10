@@ -14,8 +14,11 @@
 			{
 			//getting the blogs details
 				$get_post_id = $row['blog_id'];
+				
 				$get_post_title = $row['blog_title'];
+				$get_blog_keywords = $row['blog_keywords'];
 				$get_post_text = $row['blog_text'];
+				
 				$get_post_photo = trim($row['img_address']);
 
 				$get_post_time = $row['added_on'];
@@ -25,6 +28,7 @@
 				$html = $html . "<div class=\"user_post col-xs-12 col-md-12\" style=\"padding-bottom: 20px; \">
 									<div class=\"post_textarea_thumbnail row\">
 										<input type=\"text\" class=\"edit_post_title col-md-12 col-xs-12\" placeholder=\"blog title\" value=\"$get_post_title\">
+										<input type=\"text\" class=\"edit_post_keywords col-md-12 col-xs-12\" placeholder=\"keywords (seperated by comma , )\" value=\"$get_blog_keywords\">
 
 										<textarea maxlength=\"2500\" class=\"edit_post_textarea col-md-12 col-xs-12\" placeholder=\"write your blog\">$get_post_text</textarea>
 										<div class=\"edit_post_thumbnail col-md-12 col-xs-12\" src=\"$get_post_photo\" >";

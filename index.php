@@ -81,6 +81,7 @@
 			   		<div class="user_post col-xs-12 col-md-12">
 						<div class="post_textarea_thumbnail row">
 							<input type="text" class="post_title col-md-12 col-xs-12" placeholder="blog title">
+							<input type="text" class="post_keywords col-md-12 col-xs-12" placeholder="keywords (seperated by comma , )">
 
 							<textarea maxlength="2500" class="post_textarea col-md-12 col-xs-12" placeholder="write your blog"></textarea>
 							<div class="post_thumbnail col-md-3 col-xs-12"></div>
@@ -254,9 +255,10 @@
 			$('.post_button').on("click", function()
 			{				
 				var blog_title = $.trim($('.post_title').val());
+				var blog_keywords = $.trim($('.post_keywords').val());
 				var blog_text = $.trim($('.post_textarea').val());
 
-				$.post('php/create_blog.php', {blog_title: blog_title, blog_text: blog_text, img_address: img_address, user_id: blogSite_logged_user_id, username: blogSite_logged_user_username}, function(data)
+				$.post('php/create_blog.php', {blog_title: blog_title, blog_keywords: blog_keywords, blog_text: blog_text, img_address: img_address, user_id: blogSite_logged_user_id, username: blogSite_logged_user_username}, function(data)
 				{
 					if(data == -100)
 					{
@@ -433,10 +435,13 @@
 					$('.edit_post_button').on("click", function()
 					{				
 						var blog_title = $.trim($('.edit_post_title').val());
+						var blog_keywords = $.trim($('.edit_post_keywords').val());
 						var blog_text = $.trim($('.edit_post_textarea').val());
 
-						$.post('php/update_blog_by_id.php', {post_id: post_id, blog_title: blog_title, blog_text: blog_text, img_address: edit_img_address, user_id: blogSite_logged_user_id, username: blogSite_logged_user_username}, function(data)
+						$.post('php/update_blog_by_id.php', {post_id: post_id, blog_title: blog_title, blog_keywords: blog_keywords, blog_text: blog_text, img_address: edit_img_address, user_id: blogSite_logged_user_id, username: blogSite_logged_user_username}, function(data)
 						{
+							console.log(data);
+							
 							if(data == -100)
 							{
 								$('.error').text("Database connection error");

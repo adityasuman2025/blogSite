@@ -116,7 +116,7 @@ a:hover
 		padding-top: 10px;
 	}
 
-	.post_title, .edit_post_title
+	.post_title, .edit_post_title, .post_keywords, .edit_post_keywords
 	{
 		margin: 0;
 		height: 40px;
