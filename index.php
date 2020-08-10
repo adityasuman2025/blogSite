@@ -104,6 +104,13 @@
 
 			<!-----user post---->
 				<div class="post_container col-xs-12 col-md-12">
+					<form style="text-align: center; " action="search.php" method="get">
+						<input type="text" class="search_by_keywords" placeholder="Search blog by keywords (separate by comma ,)">
+						
+						<button class="search_btn">Search</button>
+					</form>
+					<br />
+
 					<?php
 						$offset = 0;
 
@@ -441,7 +448,7 @@
 						$.post('php/update_blog_by_id.php', {post_id: post_id, blog_title: blog_title, blog_keywords: blog_keywords, blog_text: blog_text, img_address: edit_img_address, user_id: blogSite_logged_user_id, username: blogSite_logged_user_username}, function(data)
 						{
 							console.log(data);
-							
+
 							if(data == -100)
 							{
 								$('.error').text("Database connection error");
