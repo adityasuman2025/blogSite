@@ -105,8 +105,7 @@
 			<!-----user post---->
 				<div class="post_container col-xs-12 col-md-12">
 					<form style="text-align: center; " action="search.php" method="get">
-						<input type="text" class="search_by_keywords" placeholder="Search blog by keywords (separate by comma ,)">
-						
+						<input type="text" class="search_by_keywords" name="search_by_keywords" placeholder="Search blog by keywords (separate by comma ,)">
 						<button class="search_btn">Search</button>
 					</form>
 					<br />
